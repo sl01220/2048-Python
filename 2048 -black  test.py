@@ -12,7 +12,7 @@ WIDTH, HEIGHT = 400, 500  # Increased height to make room for the score and rest
 TILE_SIZE = WIDTH // SIZE
 FONT = pygame.font.Font(None, 40)
 BACKGROUND_COLOR = (10, 10, 10)
-HEADER_COLOR = (40, 40 ,40)
+HEADER_COLOR = (40, 40, 40)
 TILE_COLORS = {
     0: (10, 10, 10),
     2: (50, 50, 50),
@@ -104,7 +104,6 @@ def draw_board(screen):
     quit_text = FONT.render("Quit", True, (255, 255, 255))
     screen.blit(quit_text, (WIDTH // 2 + 45, 55))
 
-
 def compress(board):
     new_board = [[0] * SIZE for _ in range(SIZE)]
     for r in range(SIZE):
@@ -187,6 +186,9 @@ def restart_game():
     add_new_tile()
 
 
+# Define a larger font size for the "Game Over!" message
+LARGE_FONT = pygame.font.Font(None, 80)
+
 # Main game loop
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("2048 game")
@@ -194,12 +196,14 @@ pygame.display.set_caption("2048 game")
 add_new_tile()
 add_new_tile()
 
+game_over = False
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        if event.type == pygame.KEYDOWN:
+            # Do nothing on window close button to prevent accidental exit
+            pass
+        if event.type == pygame.KEYDOWN and not game_over:
             if event.key == pygame.K_LEFT:
                 move_left()
                 add_new_tile()
@@ -214,21 +218,26 @@ while True:
                 add_new_tile()
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = event.pos
-            restart_rect = pygame.Rect(WIDTH // 2 - 105, 50, 100, 30)
-            quit_rect = pygame.Rect(WIDTH // 2 + 5, 50, 100, 30)
+            restart_rect = pygame.Rect(WIDTH // 2 - 115, 50, 109, 35)
+            quit_rect = pygame.Rect(WIDTH // 2 + 25, 50, 109, 35)
             if restart_rect.collidepoint(mouse_x, mouse_y):
                 restart_game()
+                game_over = False
             elif quit_rect.collidepoint(mouse_x, mouse_y):
                 pygame.quit()
                 sys.exit()
 
     draw_board(screen)
-    pygame.display.update()
 
     if is_game_over():
+        game_over = True
         if score > high_score:
             high_score = score
-        print("Game Over! \nYou suck!")
+        # Display "Game Over" message with larger font
+        game_over_text = LARGE_FONT.render("Game Over!", True, (255, 255, 255))
+        screen.blit(game_over_text, (WIDTH // 2 - 153, HEIGHT // 2 + 10))
 
-        pygame.quit()
-        sys.exit()
+    pygame.display.update()
+
+
+
