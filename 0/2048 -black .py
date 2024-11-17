@@ -11,21 +11,22 @@ SIZE = 4
 WIDTH, HEIGHT = 400, 400
 TILE_SIZE = WIDTH // SIZE
 FONT = pygame.font.Font(None, 40)
-BACKGROUND_COLOR = (187, 173, 160)
+BACKGROUND_COLOR = (10, 10, 10)
 TILE_COLORS = {
-    0: (187, 173, 160),
-    2: (238, 228, 218),
-    4: (237, 224, 200),
-    8: (242, 177, 121),
-    16: (245, 149, 99),
-    32: (246, 124, 95),
-    64: (246, 94, 59),
-    128: (237, 207, 114),
-    256: (237, 204, 97),
-    512: (237, 200, 80),
-    1024: (237, 197, 63),
-    2048: (237, 194, 46),
+    0: (10, 10, 10),
+    2: (50, 50, 50),
+    4: (60, 60, 60),
+    8: (70, 70, 70),
+    16: (80, 80, 80),
+    32: (90, 90, 90),
+    64: (100, 100, 100),
+    128: (110, 110, 110),
+    256: (120, 120, 120),
+    512: (130, 130, 130),
+    1024: (140, 140, 140),
+    2048: (150, 150, 150),
 }
+
 
 # Initialize the game board
 board = [[0] * SIZE for _ in range(SIZE)]
@@ -79,7 +80,7 @@ def draw_board(screen):
             rect = (c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE)
             draw_rounded_rect(screen, color, rect, corner_radius)
             if value != 0:
-                text = FONT.render(str(value), True, (0, 0, 0))
+                text = FONT.render(str(value), True, (210, 210, 210))
                 text_rect = text.get_rect(center=(c * TILE_SIZE + TILE_SIZE // 2, r * TILE_SIZE + TILE_SIZE // 2))
                 screen.blit(text, text_rect)
 

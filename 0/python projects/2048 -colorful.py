@@ -13,19 +13,21 @@ TILE_SIZE = WIDTH // SIZE
 FONT = pygame.font.Font(None, 40)
 BACKGROUND_COLOR = (187, 173, 160)
 TILE_COLORS = {
-    0: (187, 173, 160),
-    2: (238, 228, 218),
-    4: (237, 224, 200),
-    8: (242, 177, 121),
-    16: (245, 149, 99),
-    32: (246, 124, 95),
-    64: (246, 94, 59),
-    128: (237, 207, 114),
-    256: (237, 204, 97),
-    512: (237, 200, 80),
-    1024: (237, 197, 63),
-    2048: (237, 194, 46),
+    0: (187, 173, 160),   # Default tile color
+    2: (255, 102, 102),   # Light Red
+    4: (255, 178, 102),   # Light Orange
+    8: (255, 255, 102),   # Light Yellow
+    16: (102, 255, 102),  # Light Green
+    32: (102, 178, 255),  # Light Blue
+    64: (153, 102, 255),  # Light Indigo
+    128: (255, 153, 255), # Light Violet
+    256: (255, 153, 204), # Light Pink
+    512: (153, 255, 255), # Light Cyan
+    1024: (255, 153, 204), # Light Hot Pink
+    2048: (255, 153, 255),  # Light Magenta
 }
+
+
 
 # Initialize the game board
 board = [[0] * SIZE for _ in range(SIZE)]
